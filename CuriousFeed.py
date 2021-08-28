@@ -1,5 +1,5 @@
-from enum import unique
-from flask import Flask
+
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -18,11 +18,11 @@ class Content(db.Model):
 
 @app.route("/")
 def Home():
-    return "<h1>Home Page</h1>"
+    return render_template('home.html')
 
 @app.route("/video")
 def Video():
-    return "<h1>Todays Video</h1>"
+    return render_template('video.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
