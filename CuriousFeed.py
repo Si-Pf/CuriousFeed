@@ -24,6 +24,15 @@ def Home():
 def Video():
     return render_template('video.html')
 
+@app.route("/book")
+def Book():
+    return render_template('book.html')
+
+
+@app.route("/podcast")
+def Podcast():
+    return render_template('podcast.html')
+
 if __name__ == '__main__':
     #app.run(host='0.0.0.0', port=3000) #Codesphere version
     app.run(debug=True)

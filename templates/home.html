@@ -1,7 +1,21 @@
 {% extends "layout.html" %}
-{% block content %}
+{% block video %}
   <div class="home">
-    <h1>A Python product</h1>
-    <p>This website was built with Python via the Flask framework.</p>
+    <h1><a href="{{ url_for('Video') }}">Todays Video</a></h1>
+    <p>Craftfully chosen, outside your own algorithm bubble</p>
+  </div>
+{% endblock %}
+
+{% block podcast %}
+  <div class="home">
+    <h1><a href="{{ url_for('Podcast') }}">Todays podcast episode</a></h1>
+    <p>Craftfully chosen, outside your own algorithm bubble</p>
+  </div>
+{% endblock %}
+
+{% block book %}
+  <div class="home">
+    <h1><a href="{{ url_for('Book') }}">Todays book</a></h1>
+    <p>Craftfully chosen, outside your own algorithm bubble</p>
   </div>
 {% endblock %}
