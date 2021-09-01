@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Content(db.Model):
@@ -20,9 +21,9 @@ class Content(db.Model):
 def Home():
     return render_template('home.html')
 
-@app.route("/video")
+@app.route("/video", methods = ['GET'])
 def Video():
-    return render_template('video.html')
+    return render_template('video.html', content = Content.query.first())
 
 @app.route("/book")
 def Book():

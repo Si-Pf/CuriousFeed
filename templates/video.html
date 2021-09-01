@@ -2,6 +2,7 @@
 {% block video %}
    <div class="about">
      <h1>Todays Video</h1>
-     <p>Insert video here</p>
+     <p>{{content.title}}</p>
+     <iframe width="640" height="360" frameborder="0" src='{{content.link}}'></iframe>
    </div>
  {% endblock %}
