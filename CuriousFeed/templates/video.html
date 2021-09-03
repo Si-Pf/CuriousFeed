@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block video %}
+   <div class="about">
+     <h1>Todays Video</h1>
+     <p>{{video.title}}</p>
+     <iframe width="640" height="360" frameborder="0" src='{{video.link}}?modestbranding=1'></iframe>
+   </div>
+ {% endblock %}
