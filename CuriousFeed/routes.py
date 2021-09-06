@@ -1,6 +1,8 @@
-from flask import render_template
+from flask import render_template, flash, redirect
+from flask.helpers import url_for
 from CuriousFeed import app
 from CuriousFeed.models import Content
+from CuriousFeed.forms import SubmitMediaForm
 
 @app.route("/")
 def Home():
@@ -20,6 +22,11 @@ def Podcast():
     return render_template('podcast.html')
 
 
-@app.route("/submit_media")
+@app.route("/submit_media", methods=['GET', 'POST'])
 def Submit():
-    return render_template('submit_media.html')
+    form = SubmitMediaForm()
+    if form.validate_on_submit():
+        flash(f'{form.title.data} successfully submitted!', 'success')
+        return redirect(url_for('Home'))
+    return render_template('submit_media.html', title='Submit your media', form = form)
+
