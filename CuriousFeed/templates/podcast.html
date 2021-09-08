@@ -2,7 +2,8 @@
 {% block content %}
    <div class="about">
      <h1>Todays podcast episode</h1>
-     <p>Insert podcast here</p>
+     <p>{{podcast.title}}</p>
+     <iframe src="{{ podcast.link }}" width="100%" height="232" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
    </div>
    <div class="btn btn-outline-info"><a href="{{ url_for('Submit') }}">Submit your media</a></div>
  {% endblock %}

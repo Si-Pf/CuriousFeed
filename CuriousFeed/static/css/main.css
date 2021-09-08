@@ -8,10 +8,10 @@ body {
    * Formatting the header area
    */
   header {
-    background-color: #35312c;
+    background-color: #18245a;
     height: 35px;
     width: 100%;
-    opacity: .8;
+    opacity: 1;
     margin-bottom: 10px;
   }
   header h1.logo {
@@ -80,7 +80,20 @@ body {
   }
 
   a {
-      color: black;
-      text-emphasis: none;
-      text-decoration: none;
+    color: black;
+    text-emphasis: none;
+    text-decoration: none;
+}
+
+  .home_page {
+    display:flex; 
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;
+  }
+
+  .center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }

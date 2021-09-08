@@ -1,19 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
-  <div class="home">
-    <h1><a href="{{ url_for('Video') }}">Todays Video</a></h1>
+  <div class="home_page">
+  <div class="col-md-4 border">
+    <h1><a href="{{ url_for('Video') }}">Todays video</a></h1>
     <p>Craftfully chosen, outside your own algorithm bubble</p>
   </div>
 
-  <div class="home">
-    <h1><a href="{{ url_for('Podcast') }}">Todays podcast episode</a></h1>
+  <div class="col-md-4 border">
+    <h1><a href="{{ url_for('Podcast') }}">Todays podcast</a></h1>
     <p>Craftfully chosen, outside your own algorithm bubble</p>
   </div>
 
-  <div class="home">
+  <div class="col-md-4 border">
     <h1><a href="{{ url_for('Book') }}">Todays book</a></h1>
     <p>Craftfully chosen, outside your own algorithm bubble</p>
   </div>
-  <div class="btn btn-outline-info"><a href="{{ url_for('Submit') }}">Submit your media</a></div>
+  </div>
+  <a href="{{ url_for('Submit') }}"><div class="center-block btn btn-outline-info">Submit your media</div></a>
 {% endblock %}
 
