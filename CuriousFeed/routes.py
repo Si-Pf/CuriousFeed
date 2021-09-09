@@ -1,9 +1,10 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, request
 from flask.helpers import url_for
 from urllib.parse import urlparse, parse_qs
-from CuriousFeed import app, db
-from CuriousFeed.models import Content
-from CuriousFeed.forms import SubmitMediaForm
+from CuriousFeed import app, db, bcrypt
+from CuriousFeed.models import Content, User
+from CuriousFeed.forms import SubmitMediaForm, LoginForm
+from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/")
 def Home():
@@ -57,3 +58,30 @@ def Submit():
         return redirect(url_for('Home'))
     return render_template('submit_media.html', title='Submit your media', form = form)
 
+@app.route("/admin-portal")
+@login_required
+def Admin():
+    return render_template('admin.html')
+
+
+
+
+@app.route("/login", methods=['GET', 'POST'])
+def Login():
+    if current_user.is_authenticated:
+        return redirect(url_for('Home'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('Home'))
+        else:
+            flash('Login Unsuccessful. Please check email and password', 'danger')
+    return render_template('login.html', title='Login', form=form)
+
+@app.route("/logout")
+def Logout():
+    logout_user()
+    return redirect(url_for('home'))

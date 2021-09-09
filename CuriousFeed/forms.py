@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField
+from wtforms import StringField, SelectField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, ValidationError, Regexp
 from CuriousFeed.models import Content
 
@@ -31,3 +31,10 @@ class SubmitMediaForm(FlaskForm):
         if content:
             raise ValidationError('This title is already taken, please chose a different title')
 
+
+class LoginForm(FlaskForm):
+    email = StringField('Email',
+                        validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
