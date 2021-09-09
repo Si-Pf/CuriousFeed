@@ -53,7 +53,7 @@ def Submit():
             
         db.session.add(content)
         db.session.commit()
-        flash(f'{form.title.data} successfully submitted!', 'success')
+        flash(f'{form.title.data} successfully submitted for review!', 'success')
         return redirect(url_for('Home'))
     return render_template('submit_media.html', title='Submit your media', form = form)
 
