@@ -1,8 +1,33 @@
 {% extends "layout.html" %}
 {% block content %}
-   <div class="about">
-     <h1>Admin Portal</h1>
 
-   </div>
+<table class="table">
+    <!-- Table headers -->
+        <thead>
+            <tr>    
+            <th scope="col">Title</th>
+            <th scope="col">Category</th>
+            <th scope="col">Link</th>
+            <th scope="col">Approved</th>
+            </tr>
+        </thead>
+          
+    <!-- For loop logic of jinja template -->
+    {% for item in content %}
+      
+    <!-- table rows -->
+    <tr>        
+        <td>{{item.title}}</td>
+        <td>{{item.category}}</td>
+        <td><a href="{{item.link}}">{{item.link}}</a><iframe width="200" height="100" frameborder="0" src='{{item.link}}'></iframe></td>
+        <td>{{item.approved}}</td>
+        <td><a href="/edit/{{item.id}}" class="btn btn-outline-info">switch</a></td>
+      
+    {% endfor %}
+      
+    </tr>
+      
+    </table>
+
 
  {% endblock %}

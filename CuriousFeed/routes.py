@@ -1,3 +1,4 @@
+import re
 from flask import render_template, flash, redirect, request
 from flask.helpers import url_for
 from urllib.parse import urlparse, parse_qs
@@ -61,7 +62,7 @@ def Submit():
 @app.route("/admin-portal")
 @login_required
 def Admin():
-    return render_template('admin.html')
+    return render_template('admin.html', content = Content.query.all())
 
 
 
@@ -80,6 +81,23 @@ def Login():
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
+
+
+@app.route("/edit/<int:id>", methods=['GET', 'POST'])
+def Edit(id):
+    qry = db.session.query(Content).filter(
+                Content.id==id)
+    item = qry.first()
+    if item.approved == False:
+        item.approved = True
+    
+    else:
+        item.approved = False
+        
+    db.session.commit()
+    
+    return redirect(url_for('Admin'))
+
 
 @app.route("/logout")
 def Logout():
