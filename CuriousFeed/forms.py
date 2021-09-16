@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, ValidationError, Regexp
 from CuriousFeed.models import Content
+import re
 
 
 
@@ -12,19 +13,33 @@ class SubmitMediaForm(FlaskForm):
     category = SelectField('Category', validators=[DataRequired()], choices=['Video', 'Book', 'Podcast'])
     
     
-    link = StringField('Link', validators=[DataRequired(), Regexp('(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)|(?:https?:\/\/)?spotify\.com\/|(?:www\.|m\.)?spotify\.com\/(episode)', message="Currently only Youtube video links and spotify podcast links are supported, the submitted link is not valid")])
-    
-    
+    link = StringField('Link', validators=[DataRequired()])
+
     submit = SubmitField('Submit your media')
-    
+
+
 
 
     def validate_link(self, link):
         content = Content.query.filter_by(link = link.data).first()
+        
         if content:
             raise ValidationError('Content with the same link has already been submitted')
 
-       
+        if self.category.data == "Video":
+            pattern = re.compile('(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)')
+            match = re.fullmatch(pattern, link.data)
+            if not match:
+                raise ValidationError('This is not a valid Youtube link')
+
+        if self.category.data == "Podcast":
+            pattern = re.compile(r'[\bhttps://open.\b]*spotify[\b.com\b]*[/:]*episode[/:]*[A-Za-z0-9?=]+')
+            match = re.fullmatch(pattern, link.data)
+            if not match:
+                raise ValidationError('This is not a valid Spotify link')
+
+        
+    
 
     def validate_title(self, title):
         content = Content.query.filter_by(title = title.data).first()

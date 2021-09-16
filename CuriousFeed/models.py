@@ -14,6 +14,7 @@ class Content(db.Model):
     category = db.Column(db.String(60), nullable=False)
     approved = db.Column(db.Boolean(), default=False)
     displayed = db.Column(db.Boolean(), default=False)
+    active = db.Column(db.Boolean(), default=False)
 
     def __repr__(self):
         return f"Content('{self.title}', '{self.link}', '{self.cover_image}'"

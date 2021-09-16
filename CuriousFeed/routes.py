@@ -13,7 +13,7 @@ def Home():
 
 @app.route("/video")
 def Video():
-      return render_template('video.html', video = Content.query.filter(Content.category == "Video").first())
+      return render_template('video.html', video = Content.query.filter(Content.category == "Video", Content.active == True).first())
 
 @app.route("/book")
 def Book():
@@ -84,6 +84,7 @@ def Login():
 
 
 @app.route("/edit/<int:id>", methods=['GET', 'POST'])
+@login_required
 def Edit(id):
     qry = db.session.query(Content).filter(
                 Content.id==id)
@@ -93,7 +94,7 @@ def Edit(id):
     
     else:
         item.approved = False
-        
+
     db.session.commit()
     
     return redirect(url_for('Admin'))
