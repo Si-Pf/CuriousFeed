@@ -104,3 +104,7 @@ def Edit(id):
 def Logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route("/impressum")
+def Impressum():
+    return render_template("impressum.html")
