@@ -19,9 +19,10 @@
     <tr>        
         <td>{{item.title}}</td>
         <td>{{item.category}}</td>
-        <td><a href="{{item.link}}">{{item.link}}</a><iframe width="200" height="100" frameborder="0" src='{{item.link}}'></iframe></td>
+        <td><a href="{{item.link}}">{{item.link}}</a></td>
         <td>{{item.approved}}</td>
         <td><a href="/edit/{{item.id}}" class="btn btn-outline-info">switch</a></td>
+        <td><a href="/delete/{{item.id}}" class="btn btn-outline-danger">delete</a></td>        
       
     {% endfor %}
       

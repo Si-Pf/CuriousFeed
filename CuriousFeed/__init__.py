@@ -29,10 +29,11 @@ def scheduled():
     video = Content.query.filter(Content.category == "Video", Content.displayed == False, Content.approved == True).order_by(func.random()).first()
     if video:
         video_old = Content.query.filter(Content.active == True, Content.category == "Video").first()
-        video_old.active = False
+        if video_old:
+            video_old.active = False
         video.displayed = True
         video.active = True
-        print(video.title + 'activated')
+        print(video.title + ' activated')
         db.session.commit()
     else:
         print('No new Videos available')
@@ -41,10 +42,11 @@ def scheduled():
     podcast = Content.query.filter(Content.category == "Podcast", Content.displayed == False, Content.approved == True).order_by(func.random()).first()
     if podcast:
         podcast_old = Content.query.filter(Content.active == True, Content.category == "Podcast").first()
-        podcast_old.active = False        
+        if podcast_old:
+            podcast_old.active = False        
         podcast.displayed = True
         podcast.active = True
-        print(podcast.title + 'activated')
+        print(podcast.title + ' activated')
         db.session.commit()
     else:
         print('No new Podcasts available')

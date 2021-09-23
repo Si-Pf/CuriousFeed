@@ -34,11 +34,14 @@
                     {{ form.category(class= "form-control form-control-lg") }}
                 {% endif %}
                 </div>
-
                 <div class="form-group">
                     {{ form.link.label(class= "form-control-label") }}
-
-                    {% if form.link.errors %}
+                    {% if form.category.data == "Video" %}
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="The URL needs to of form https://www.youtube.com/watch?v=XXXXX or https://youtu.be/XXXXX or https://www.youtube.com/embed/XXXXX">?</button>                 
+                    {% elif form.category.data == "Podcast" %}
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="The URL needs to of form https://open.spotify.com/episode/XXXXXXXXXXX">?</button>
+                    {% endif %}                    
+                        {% if form.link.errors %}
                         {{ form.link(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.link.errors %}
