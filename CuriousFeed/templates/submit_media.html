@@ -40,6 +40,8 @@
                         <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="The URL needs to of form https://www.youtube.com/watch?v=XXXXX or https://youtu.be/XXXXX or https://www.youtube.com/embed/XXXXX">?</button>                 
                     {% elif form.category.data == "Podcast" %}
                         <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="The URL needs to of form https://open.spotify.com/episode/XXXXXXXXXXX">?</button>
+                    {% elif form.category.data == "Book" %}
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="The ISBN needs to 10 or 13 digits. Dashes and blank spaces are ignored. Valid examples: 978-1471156267 or 978-1-4711-5626-7 or 1471156265">?</button>    
                     {% endif %}                    
                         {% if form.link.errors %}
                         {{ form.link(class="form-control form-control-lg is-invalid") }}

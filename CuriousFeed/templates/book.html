@@ -1,9 +1,24 @@
 {% extends "layout.html" %}
 {% block content %}
-   <div class="about">
-     <h1>Todays book</h1>
-     <p>Insert book here</p>
-     <a href="https://www.thalia.de/shop/home/artikeldetails/ID150650159.html">Thalia link</a>
+   <div class="about pl-2">
+    <h1>Todays book</h1>
+      <div class="row">
+    <div class="col-md-4">
+        Kindle preview:
+        <br>
+        <iframe type="text/html" width="336" height="550" frameborder="0" allowfullscreen style="max-width:100%" src="{{ book.link }}" ></iframe>
+        <br>
+        <a href="https://www.thalia.de/suche?filterPATHROOT=c2&sq={{ isbn }}" target="_blank" rel="noopener noreferrer">You'd rather support a local book shop like Thalia? Find the book here</a>
+    </div>
+
+
+
+    <div class="col-md-6">
+      <p><b>{{ data.Title }}</b> by {{ data.Author }}</p>
+    </div>
+    
+   </div>
+
    </div>
    <div class="btn btn-outline-info"><a href="{{ url_for('Submit') }}">Submit your media</a></div>
  {% endblock %}

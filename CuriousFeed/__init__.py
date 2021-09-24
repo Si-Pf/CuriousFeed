@@ -33,7 +33,7 @@ def scheduled():
             video_old.active = False
         video.displayed = True
         video.active = True
-        print(video.title + ' activated')
+        print('video ' + video.title + ' activated')
         db.session.commit()
     else:
         print('No new Videos available')
@@ -46,8 +46,22 @@ def scheduled():
             podcast_old.active = False        
         podcast.displayed = True
         podcast.active = True
-        print(podcast.title + ' activated')
+        print('podcast ' +podcast.title + ' activated')
         db.session.commit()
     else:
         print('No new Podcasts available')
+
+    #Randomly select new book
+    book = Content.query.filter(Content.category == "Book", Content.displayed == False, Content.approved == True).order_by(func.random()).first()
+    if book:
+        book_old = Content.query.filter(Content.active == True, Content.category == "Book").first()
+        if book_old:
+            book_old.active = False        
+        book.displayed = True
+        book.active = True
+        print('book ' +book.title + ' activated')
+        db.session.commit()
+    else:
+        print('No new books available')
+
     return

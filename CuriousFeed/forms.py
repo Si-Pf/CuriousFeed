@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, ValidationError
 from CuriousFeed.models import Content
+from isbnlib import notisbn
 import re
 import requests
 
@@ -14,7 +15,7 @@ class SubmitMediaForm(FlaskForm):
     category = SelectField('Category', validators=[DataRequired()], choices=['Video', 'Book', 'Podcast'])
     
     
-    link = StringField('Url', validators=[DataRequired()])
+    link = StringField('Url / ISBN', validators=[DataRequired()])
 
     submit = SubmitField('Submit your media')
 
@@ -46,7 +47,11 @@ class SubmitMediaForm(FlaskForm):
 
 
 
-        
+        elif self.category.data == "Book":                    
+            if notisbn(link.data):
+                raise ValidationError('This is not a valid ISBN')
+                           
+            
     
 
     def validate_title(self, title):

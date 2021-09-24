@@ -5,6 +5,7 @@ from CuriousFeed import app, db, bcrypt
 from CuriousFeed.models import Content, User
 from CuriousFeed.forms import SubmitMediaForm, LoginForm
 from flask_login import login_user, current_user, logout_user, login_required
+from isbnlib import canonical, to_isbn10, meta
 
 def get_video_id(video):
     u_pars = urlparse(video)
@@ -19,6 +20,14 @@ def get_podcast_id(podcast):
     id = podcast.rpartition('/')[-1]
     return id
 
+def get_isbn_10(isbn):
+    if len(canonical(isbn)) == 13:
+        return to_isbn10(isbn)
+    else: 
+        return isbn
+
+
+
 
 @app.route("/")
 def Home():
@@ -32,7 +41,12 @@ def Video():
 
 @app.route("/book")
 def Book():
-    return render_template('book.html')
+    book = Content.query.filter(Content.category == "Book", Content.active == True).first()
+    isbn = get_isbn_10(book.link)
+    book.link = "https://lesen.amazon.de/kp/card?asin="+ isbn +"&preview=inline&linkCode=kpe&hideBuy=true&hideShare=true"
+    data = meta(isbn)
+    data['Author'] = data['Authors'][0]
+    return render_template('book.html', book = book, isbn = isbn, data = data)
 
 
 @app.route("/podcast")
