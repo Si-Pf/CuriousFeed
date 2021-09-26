@@ -15,6 +15,11 @@ class Content(db.Model):
     approved = db.Column(db.Boolean(), default=False)
     displayed = db.Column(db.Boolean(), default=False)
     active = db.Column(db.Boolean(), default=False)
+    reason = db.Column(db.String(), default='No reason provided')
+    recommended_by_name = db.Column(db.String(), default='Anonymus')
+    recommended_by_age = db.Column(db.Integer())
+    
+
 
     def __repr__(self):
         return f"Content('{self.title}', '{self.link}', '{self.cover_image}'"
