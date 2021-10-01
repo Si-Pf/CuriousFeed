@@ -5,21 +5,7 @@
            {{ form.hidden_tag() }}
            <fieldset class="form-group">
                <legend class="border-bottom mb-4">Submit your media</legend>
-               <div class="form-group">
-                   {{ form.title.label(class= "form-control-label") }}
-
-                   {% if form.title.errors %}
-                     {{ form.title(class="form-control form-control-lg is-invalid") }}
-                     <div class="invalid-feedback">
-                         {% for error in form.title.errors %}
-                            <span>{{ error }}</span>
-                         {% endfor %}
-                     </div>
-                   {% else %}
-                        {{ form.title(class= "form-control form-control-lg") }}
-                   {% endif %}
-                 
-               </div>
+               
                <div class="form-group">
                 {{ form.category.label(class= "form-control-label") }}
 
@@ -34,6 +20,7 @@
                     {{ form.category(class= "form-control form-control-lg") }}
                 {% endif %}
                 </div>
+
                 <div class="form-group">
                     {{ form.link.label(class= "form-control-label") }}
                     {% if form.category.data == "Video" %}
@@ -54,6 +41,71 @@
                         {{ form.link(class= "form-control form-control-lg") }}
                     {% endif %}
                 </div>
+
+                <div class="form-group">
+                    {{ form.keywords.label(class= "form-control-label") }}
+ 
+                    {% if form.keywords.errors %}
+                      {{ form.keywords(class="form-control form-control-lg is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.keywords.errors %}
+                             <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                    {% else %}
+                         {{ form.keywords(class= "form-control form-control-lg") }}
+                    {% endif %}
+                  
+                </div>
+
+                <div class="form-group">
+                    {{ form.reason.label(class= "form-control-label") }}
+ 
+                    {% if form.reason.errors %}
+                      {{ form.reason(class="form-control form-control-lg is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.reason.errors %}
+                             <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                    {% else %}
+                         {{ form.reason(class= "form-control form-control-lg") }}
+                    {% endif %}
+                  
+                </div>
+
+                <div class="form-group">
+                    {{ form.age.label(class= "form-control-label") }}
+ 
+                    {% if form.age.errors %}
+                      {{ form.age(class="form-control form-control-lg is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.age.errors %}
+                             <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                    {% else %}
+                         {{ form.age(class= "form-control form-control-lg") }}
+                    {% endif %}
+                  
+                </div>
+
+                <div class="form-group">
+                    {{ form.profession.label(class= "form-control-label") }}
+ 
+                    {% if form.profession.errors %}
+                      {{ form.profession(class="form-control form-control-lg is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.profession.errors %}
+                             <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                    {% else %}
+                         {{ form.profession(class= "form-control form-control-lg") }}
+                    {% endif %}
+                  
+                </div>
+
            </fieldset>
            <div class="form-group">
                {{ form.submit(class="btn btn-outline-info") }}

@@ -7,7 +7,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 class Content(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    content_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(20), unique=True)
     link = db.Column(db.String())
     cover_image = db.Column(db.String(20), default='default.jpg')
@@ -15,9 +15,9 @@ class Content(db.Model):
     approved = db.Column(db.Boolean(), default=False)
     displayed = db.Column(db.Boolean(), default=False)
     active = db.Column(db.Boolean(), default=False)
-    #reason = db.Column(db.String(), default='No reason provided')
-    #recommended_by_name = db.Column(db.String(), default='Anonymus')
-    #recommended_by_age = db.Column(db.Integer())
+    reason = db.Column(db.String(), default='No reason provided')
+    recommended_by_name = db.Column(db.String(), default='Anonymus')
+    recommended_by_age = db.Column(db.Integer())
     
 
 
@@ -25,10 +25,15 @@ class Content(db.Model):
         return f"Content('{self.title}', '{self.link}', '{self.cover_image}'"
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
+
+class Feedback(db.Model):
+    feedback_id = db.Column(db.Integer(), primary_key=True)
+    feedback = db.Column(db.String(), nullable=False)
+    sent_on = db.Column(db.Date())

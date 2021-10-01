@@ -1,11 +1,14 @@
 from flask import render_template, flash, redirect, request
 from flask.helpers import url_for
 from urllib.parse import urlparse, parse_qs
-from CuriousFeed import app, db, bcrypt
-from CuriousFeed.models import Content, User
-from CuriousFeed.forms import SubmitMediaForm, LoginForm
+from CuriousFeed import app, db, bcrypt, mail
+from CuriousFeed.models import Content, User, Feedback
+from CuriousFeed.forms import SubmitMediaForm, LoginForm, FeedbackForm
 from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
 from isbnlib import canonical, to_isbn10, meta
+from datetime import datetime
+import os
 
 def get_video_id(video):
     u_pars = urlparse(video)
@@ -64,18 +67,18 @@ def Submit():
 
 
     if form.validate_on_submit():
-        if form.category.data =="Video":
-            content = Content(title = form.title.data, category = form.category.data, link = form.link.data)
+        #if form.category.data =="Video":
+        content = Content(reason = form.reason.data, category = form.category.data, link = form.link.data, recommended_by_age = form.age.data, recommended_by_name = form.profession.data, title = form.keywords.data)
 
-        elif form.category.data =="Podcast":
-            content = Content(title = form.title.data, category = form.category.data, link = form.link.data)
+  #      elif form.category.data =="Podcast":
+   #         content = Content(reason = form.reason.data, category = form.category.data, link = form.link.data)
             
-        else:
-            content = Content(title = form.title.data, category = form.category.data, link = form.link.data)
+    #    else:
+     #       content = Content(reason = form.reason.data, category = form.category.data, link = form.link.data)
             
         db.session.add(content)
         db.session.commit()
-        flash(f'{form.title.data} successfully submitted for review!', 'success')
+        flash(f'{form.link.data} successfully submitted for review!', 'success')
         return redirect(url_for('Home'))
     return render_template('submit_media.html', title='Submit your media', form = form)
 
@@ -107,7 +110,7 @@ def Login():
 @login_required
 def Edit(id):
     qry = db.session.query(Content).filter(
-                Content.id==id)
+                Content.content_id==id)
     item = qry.first()
     if item.approved == False:
         item.approved = True
@@ -123,7 +126,7 @@ def Edit(id):
 @login_required
 def Delete(id):
     db.session.query(Content).filter(
-                Content.id==id).delete()
+                Content.content_id==id).delete()
 
     db.session.commit()
     
@@ -138,3 +141,19 @@ def Logout():
 @app.route("/impressum")
 def Impressum():
     return render_template("impressum.html")
+
+@app.route("/feedback", methods=['GET', 'POST'])
+def Feedback_form():
+    form = FeedbackForm()
+
+    if form.validate_on_submit():
+        feedback = Feedback(feedback = form.feedback.data, sent_on = datetime.now())
+        msg = Message('New feedback was submitted to CuriousFeed', sender = "bot@curiousfeed.de", recipients=[os.environ.get('FEEDBACK_TO')])
+        msg.body = "New feedback: "+ form.feedback.data
+        mail.send(msg)
+        db.session.add(feedback)
+        db.session.commit()
+        flash('Feedback succesfully submitted', 'success')
+        return redirect(url_for('Home'))
+    
+    return render_template('feedback.html', title='Feedback', form=form)

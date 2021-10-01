@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField, PasswordField, BooleanField
+from wtforms import StringField, SelectField, SubmitField, PasswordField, BooleanField, IntegerField, TextAreaField, DateField
 from wtforms.validators import DataRequired, Length, ValidationError
 from CuriousFeed.models import Content
 from isbnlib import notisbn
@@ -9,13 +9,18 @@ import requests
 
 
 class SubmitMediaForm(FlaskForm):
-    title = StringField('Title', 
-                        validators= [DataRequired(), Length(min=4, max=60)])
+    reason = TextAreaField('Why do you recommend this? Give a few short sentences why this is worth watching/listening/reading', 
+                        validators= [DataRequired()])
 
     category = SelectField('Category', validators=[DataRequired()], choices=['Video', 'Book', 'Podcast'])
     
-    
+    keywords = StringField('Keywords that describe the content of the submitted media. Separate multiple keywords with a comma.')
+
     link = StringField('Url / ISBN', validators=[DataRequired()])
+
+    age = IntegerField('*Optional* Tell people your age')
+
+    profession = StringField('*Optional* Tell people what you do for a living')
 
     submit = SubmitField('Submit your media')
 
@@ -54,10 +59,10 @@ class SubmitMediaForm(FlaskForm):
             
     
 
-    def validate_title(self, title):
-        content = Content.query.filter_by(title = title.data).first()
-        if content:
-            raise ValidationError('This title is already taken, please chose a different title')
+#    def validate_title(self, title):
+ #       content = Content.query.filter_by(title = title.data).first()
+  #      if content:
+   #         raise ValidationError('This title is already taken, please chose a different title')
 
 
 class LoginForm(FlaskForm):
@@ -66,3 +71,8 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+class FeedbackForm(FlaskForm):
+    feedback = TextAreaField('Feedback', validators=[DataRequired()])
+    submitted_on = DateField('Submit date')
+    submit = SubmitField('Submit feedback')
