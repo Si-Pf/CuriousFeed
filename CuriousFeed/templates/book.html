@@ -15,6 +15,11 @@
 
     <div class="col-md-6">
       <p><b>{{ data.Title }}</b> by {{ data.Author }}</p>
+      <p>Keywords: {{ book.title }}</p>
+      <blockquote class="blockquote">
+        <p>{{book.reason}}</p>
+        <footer class="blockquote-footer">{{book.recommended_by_name}}, {{book.recommended_by_age}}</footer>
+      </blockquote>
     </div>
     
    </div>

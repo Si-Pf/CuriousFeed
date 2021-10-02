@@ -2,8 +2,18 @@
 {% block content %}
    <div class="about pl-2">
      <h1>Todays Video</h1>
-     <p>{{video.title}}</p>
-     <iframe width="640" height="360" frameborder="0" src='{{video.link}}'></iframe>
+     <div class="row">
+      <div class="col-md-9 ">
+        <iframe width="640" height="360" frameborder="0" src='{{video.link}}'></iframe>
+        <p>Keywords: {{ video.title }}</p>
+      </div>
+    <div class="col-md-2">
+      <blockquote class="blockquote">
+        <p>{{video.reason}}</p>
+        <footer class="blockquote-footer">{{video.recommended_by_name}}, {{video.recommended_by_age}}</footer>
+      </blockquote>
+    </div>
    </div>
+  </div>
    <div class="btn btn-outline-info"><a href="{{ url_for('Submit') }}">Submit your media</a></div>
  {% endblock %}
