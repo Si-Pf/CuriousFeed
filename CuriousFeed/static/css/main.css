@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: rgb(9, 100, 6);
+    color: rgb(0, 0, 0);
   }
   /*
    * Formatting the header area
@@ -13,6 +13,7 @@ body {
     width: 100%;
     opacity: 1;
     margin-bottom: 10px;
+    margin-top: 0px;
   }
   header h1.logo {
     margin: 0;
@@ -64,6 +65,24 @@ body {
     letter-spacing: -1px;
     color: #999;
   }
+
+  .background_img {
+    background-image: url("/static/Background_v1.jpg");
+    background-color: #cccccc;
+   
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+
+  .zoom {
+    transition: transform .02s;
+  }
+
+  .zoom:hover {
+    transform: scale(1.02);
+  }
   .menu {
     float: right;
     margin-top: 8px;
@@ -97,3 +116,11 @@ body {
     margin-left: auto;
     margin-right: auto;
   }
+
+  #preview{
+    margin:30px;
+    position:relative;
+    overflow:hidden;
+    height:250px;
+    width:416px;
+}
