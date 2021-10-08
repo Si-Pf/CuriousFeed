@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-   <div class="about pl-2">
+   <div class="pl-2 pt-2 mb-3 bg-light border-start rounded border-warning border-5 p-5">
     <h1>Todays book</h1>
       <div class="row">
     <div class="col-md-4">
@@ -14,9 +14,10 @@
 
 
     <div class="col-md-6">
+      <br>
       <p><b>{{ data.Title }}</b> by {{ data.Author }}</p>
       <p>Keywords: {{ book.title }}</p>
-      <blockquote class="blockquote">
+      <blockquote class="blockquote border border-warning rounded p-2">
         <p>{{book.reason}}</p>
         <footer class="blockquote-footer">{{book.recommended_by_name}}, {{book.recommended_by_age}}</footer>
       </blockquote>
@@ -25,5 +26,5 @@
    </div>
 
    </div>
-   <div class="btn btn-outline-info"><a href="{{ url_for('Submit') }}">Submit your media</a></div>
+   <a href="{{ url_for('Submit') }}"><div class="btn btn-warning zoom">Submit your media</div></a>
  {% endblock %}

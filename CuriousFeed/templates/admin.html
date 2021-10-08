@@ -1,13 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<table class="table">
+<table class="table bg-light rounded border border-dark">
     <!-- Table headers -->
         <thead>
             <tr>    
-            <th scope="col">Title</th>
             <th scope="col">Category</th>
-            <th scope="col">Link</th>
+            <th scope="col">Keywords</th>
+            <th scope="col">Link / ISBN</th>
+            <th scope="col">Reason</th>
             <th scope="col">Approved</th>
             </tr>
         </thead>
@@ -17,9 +18,10 @@
       
     <!-- table rows -->
     <tr>        
-        <td>{{item.title}}</td>
         <td>{{item.category}}</td>
+        <td>{{item.title}}</td>
         <td><a href="{{item.link}}">{{item.link}}</a></td>
+        <td>{{item.reason}}</td>
         <td>{{item.approved}}</td>
         <td><a href="/edit/{{item.content_id}}" class="btn btn-outline-info">switch</a></td>
         <td><a href="/delete/{{item.content_id}}" class="btn btn-outline-danger">delete</a></td>        

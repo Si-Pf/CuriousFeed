@@ -9,6 +9,7 @@ from flask_mail import Message
 from isbnlib import canonical, to_isbn10, meta
 from datetime import datetime
 import os
+import re
 
 def get_video_id(video):
     u_pars = urlparse(video)
@@ -68,7 +69,9 @@ def Submit():
 
     if form.validate_on_submit():
         #if form.category.data =="Video":
-        content = Content(reason = form.reason.data, category = form.category.data, link = form.link.data, recommended_by_age = form.age.data, recommended_by_name = form.profession.data, title = form.keywords.data)
+        reason = re.sub(r'http\S+', '*Link removed for security reasons*', form.reason.data)
+
+        content = Content(reason = reason, category = form.category.data, link = form.link.data, recommended_by_age = form.age.data, recommended_by_name = form.name.data, title = form.keywords.data)
 
   #      elif form.category.data =="Podcast":
    #         content = Content(reason = form.reason.data, category = form.category.data, link = form.link.data)

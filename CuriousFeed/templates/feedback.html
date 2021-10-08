@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section">
+    <div class="content-section bg-light p-2 mb-5 rounded">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
@@ -19,10 +19,11 @@
                     {% endif %}
                 </div>
             </fieldset>
-            <div class="form-group">
+            <div class="form-group mt-2">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
     </div>
-    
+
+
 {% endblock content %}

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, PasswordField, BooleanField, IntegerField, TextAreaField, DateField
-from wtforms.validators import DataRequired, Length, ValidationError
+from wtforms.validators import DataRequired, Length, ValidationError, URL, Optional
 from CuriousFeed.models import Content
 from isbnlib import notisbn
 import re
@@ -10,17 +10,17 @@ import requests
 
 class SubmitMediaForm(FlaskForm):
     reason = TextAreaField('Why do you recommend this? Give a few short sentences why this is worth watching/listening/reading', 
-                        validators= [DataRequired()])
+                        validators= [DataRequired(), Length(min=10, max=400)])
 
     category = SelectField('Category', validators=[DataRequired()], choices=['Video', 'Book', 'Podcast'])
     
-    keywords = StringField('Keywords that describe the content of the submitted media. Separate multiple keywords with a comma.')
+    keywords = StringField('Keywords that describe the content of the submitted media. Separate multiple keywords with a comma.', validators= [Length(min=4, max=100)])
 
     link = StringField('Url / ISBN', validators=[DataRequired()])
 
-    age = IntegerField('*Optional* Tell people your age')
+    age = IntegerField('*Optional* Tell people your age', validators=[Optional()])
 
-    profession = StringField('*Optional* Tell people what you do for a living')
+    name = StringField('*Optional* Tell people your first name', validators=[Optional()])
 
     submit = SubmitField('Submit your media')
 

@@ -1,19 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
-   <div class="pl-2 mb-5 bg-info rounded">
-     <h1>Todays Video</h1>
-     <div class="row">
-      <div class="col-md-auto ratio ratio-16x9" >
-        <iframe width="640" height="360" frameborder="0" src='{{video.link}}'></iframe>
-        <p>Keywords: {{ video.title }}</p>
+   <div class="pl-2 pt-2 mb-3 bg-light border-start rounded border-info border-5 p-5">
+     <h1>Todays Video</h1>   
+     
+     <div class="row m-1">
+        <div class="col-md-5 ratio ratio-16x9">
+          <iframe  frameborder="0" src='{{video.link}}'></iframe>
+        </div>
+        
       </div>
-    <div class="col-md-2">
-      <blockquote class="blockquote bg-light p-2 rounded">
-        <p>{{video.reason}}</p>
-        <footer class="blockquote-footer">{{video.recommended_by_name}}, {{video.recommended_by_age}}</footer>
-      </blockquote>
-    </div>
-   </div>
+      <p>Keywords: {{ video.title }}</p>
+
+      <div class="col-md-auto m-1">
+        <blockquote class="blockquote border border-info p-2 rounded">
+          <p>{{video.reason}}</p>
+          <footer class="blockquote-footer">{{video.recommended_by_name}}, {{video.recommended_by_age}}</footer>
+        </blockquote>
+      </div>   
   </div>
-   <div class="btn btn-outline-info"><a href="{{ url_for('Submit') }}">Submit your media</a></div>
+  <a href="{{ url_for('Submit') }}"><div class="btn btn-info zoom">Submit your media</div></a> 
  {% endblock %}
