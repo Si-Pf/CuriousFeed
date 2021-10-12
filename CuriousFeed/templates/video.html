@@ -5,7 +5,7 @@
      
      <div class="row m-1">
         <div class="col-md-5 ratio ratio-16x9">
-          <iframe  frameborder="0" src='{{video.link}}'></iframe>
+          <iframe class="embed-responsive-item" frameborder="0" src='{{video.link}}'></iframe>
         </div>
         
       </div>
@@ -18,5 +18,5 @@
         </blockquote>
       </div>   
   </div>
-  <a href="{{ url_for('Submit') }}"><div class="btn btn-info zoom">Submit your media</div></a> 
+  <a href="{{ url_for('Submit') }}"><div class="btn btn-info zoom mb-3">Submit your media</div></a> 
  {% endblock %}

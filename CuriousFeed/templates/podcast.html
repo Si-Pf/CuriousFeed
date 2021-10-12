@@ -2,7 +2,7 @@
 {% block content %}
    <div class="pl-2 pt-2 mb-3 bg-light border-start rounded border-success border-5 p-5">
      <h1>Todays podcast episode</h1>
-     <iframe src="{{ podcast.link }}" width="100%" height="232" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+     <iframe class="embed-responsive-item" src="{{ podcast.link }}" width="100%" height="232" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
      <p>Keywords: {{ podcast.title }}</p>
      
      <blockquote class="blockquote border border-success rounded p-2">

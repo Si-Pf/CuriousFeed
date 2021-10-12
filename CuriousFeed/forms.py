@@ -9,7 +9,7 @@ import requests
 
 
 class SubmitMediaForm(FlaskForm):
-    reason = TextAreaField('Why do you recommend this? Give a few short sentences why this is worth watching/listening/reading', 
+    reason = TextAreaField('Why do you recommend this? Give a few short sentences why this is worth watching/listening/reading.', 
                         validators= [DataRequired(), Length(min=10, max=400)])
 
     category = SelectField('Category', validators=[DataRequired()], choices=['Video', 'Book', 'Podcast'])
