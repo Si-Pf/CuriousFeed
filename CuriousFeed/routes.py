@@ -35,7 +35,8 @@ def get_isbn_10(isbn):
 
 @app.route("/")
 def Home():
-    return render_template('home.html')
+#    return render_template('home.html')
+    return render_template('home_count.html')    
 
 @app.route("/video")
 def Video():
@@ -160,3 +161,5 @@ def Feedback_form():
         return redirect(url_for('Home'))
     
     return render_template('feedback.html', title='Feedback', form=form)
+
+

@@ -63,6 +63,16 @@
     position: relative;
   }
 
+  .background_img_count {
+    background-image: url("/static/Background_count.jpg");
+    background-color: #cccccc;
+   
+    background-position: 30% 20%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }  
+
   .zoom {
     transition: transform .02s;
   }
